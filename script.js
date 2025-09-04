@@ -165,11 +165,6 @@ function handleFileSelect(file) {
 
 // Upload to Supabase
 async function uploadToSupabase(file) {
-    // Check authentication
-    if (!isAuthenticated) {
-        throw new Error('Please sign in to upload images');
-    }
-
     try {
         // Generate unique filename
         const fileName = generateUniqueFileName(file.name);
@@ -312,7 +307,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const dropText = document.getElementById('dropText');
     const clickText = document.getElementById('clickText');
     const uploadContent = document.querySelector('.upload-content');
-
     // Authentication event listeners
     if (authForm) {
         authForm.addEventListener('submit', (e) => {
