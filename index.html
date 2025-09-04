@@ -7,17 +7,10 @@
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        window.SUPABASE_URL = '$SUPABASE_URL';
-        window.SUPABASE_ANON_KEY = '$SUPABASE_ANON_KEY';
-        window.AUTH_USERNAME = '$AUTH_USERNAME';
-        window.AUTH_PASSWORD = '$AUTH_PASSWORD';
-        
-        // Debug environment variables in browser console
-        console.log('🔍 Environment variables loaded:');
-        console.log('SUPABASE_URL:', window.SUPABASE_URL);
-        console.log('SUPABASE_ANON_KEY:', window.SUPABASE_ANON_KEY ? window.SUPABASE_ANON_KEY.substring(0, 20) + '...' : 'NOT SET');
-        console.log('AUTH_USERNAME:', window.AUTH_USERNAME);
-        console.log('AUTH_PASSWORD:', window.AUTH_PASSWORD ? window.AUTH_PASSWORD.substring(0, 5) + '...' : 'NOT SET');
+        window.SUPABASE_URL = 'https://ysmcrwbbizmvpkjaaltp.supabase.co';
+        window.SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlzbWNyd2JiaXptdnBramFhbHRwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEzODc2MjEsImV4cCI6MjA2Njk2MzYyMX0.ZJJBRR_tpz0bRCz3uriX8kF_168tJAe1eTWgPdjxvyo';
+        window.AUTH_USERNAME = 'admin';
+        window.AUTH_PASSWORD = '12341234';
     </script>
 </head>
 <body>
@@ -126,7 +119,6 @@
                 <p id="errorText"></p>
             </div>
         </main>
-
     </div>
 
     <script src="script.js"></script>

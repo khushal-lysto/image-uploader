@@ -1,0 +1,28 @@
+{
+    "name": "image-upload-supabase",
+    "version": "1.0.0",
+    "description": "A beautiful image upload application with Supabase integration",
+    "main": "index.html",
+    "scripts": {
+        "start": "node serve.js",
+        "dev": "node serve.js",
+        "static": "npx http-server -p 3000 -o",
+        "build": "node build-static.js",
+        "build:static": "node build-static.js",
+        "setup": "node setup.js"
+    },
+    "keywords": [
+        "image-upload",
+        "supabase",
+        "file-sharing",
+        "web-app"
+    ],
+    "author": "",
+    "license": "MIT",
+    "devDependencies": {
+        "http-server": "^14.1.1"
+    },
+    "dependencies": {
+        "dotenv": "^16.3.1"
+    }
+}
