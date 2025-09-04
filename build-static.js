@@ -1,4 +1,13 @@
-<!DOCTYPE html>
+const fs = require('fs');
+const path = require('path');
+
+// Load environment variables
+require('dotenv').config();
+
+console.log('🔨 Building static version for GitHub Pages...');
+
+// Read the original HTML template
+const htmlTemplate = `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,10 +16,10 @@
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        window.SUPABASE_URL = 'https://ysmcrwbbizmvpkjaaltp.supabase.co';
-        window.SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlzbWNyd2JiaXptdnBramFhbHRwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEzODc2MjEsImV4cCI6MjA2Njk2MzYyMX0.ZJJBRR_tpz0bRCz3uriX8kF_168tJAe1eTWgPdjxvyo';
-        window.AUTH_USERNAME = 'admin';
-        window.AUTH_PASSWORD = '12341234';
+        window.SUPABASE_URL = '{{SUPABASE_URL}}';
+        window.SUPABASE_ANON_KEY = '{{SUPABASE_ANON_KEY}}';
+        window.AUTH_USERNAME = '{{AUTH_USERNAME}}';
+        window.AUTH_PASSWORD = '{{AUTH_PASSWORD}}';
     </script>
 </head>
 <body>
@@ -128,4 +137,29 @@
 
     <script src="script.js"></script>
 </body>
-</html>
+</html>`;
+
+// Get environment variables
+const SUPABASE_URL = process.env.SUPABASE_URL || 'YOUR_SUPABASE_URL';
+const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY || 'YOUR_SUPABASE_ANON_KEY';
+const AUTH_USERNAME = process.env.AUTH_USERNAME || 'admin';
+const AUTH_PASSWORD = process.env.AUTH_PASSWORD || 'password';
+
+// Replace placeholders
+const staticHtml = htmlTemplate
+    .replace('{{SUPABASE_URL}}', SUPABASE_URL)
+    .replace('{{SUPABASE_ANON_KEY}}', SUPABASE_ANON_KEY)
+    .replace('{{AUTH_USERNAME}}', AUTH_USERNAME)
+    .replace('{{AUTH_PASSWORD}}', AUTH_PASSWORD);
+
+// Write the static HTML file
+fs.writeFileSync('index.html', staticHtml);
+
+console.log('✅ Static version built successfully!');
+console.log('📁 Generated: index.html');
+console.log('🚀 Ready for GitHub Pages deployment');
+
+// Validate environment variables
+if (SUPABASE_URL === 'YOUR_SUPABASE_URL' || SUPABASE_ANON_KEY === 'YOUR_SUPABASE_ANON_KEY') {
+    console.log('⚠️  Warning: Please set SUPABASE_URL and SUPABASE_ANON_KEY in your .env file');
+}
