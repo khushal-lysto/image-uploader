@@ -2,14 +2,29 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main, master, gh-pages ]
+    branches: [ main ]
   pull_request:
-    branches: [ main, master ]
+    branches: [ main ]
   workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+        - production
+        - staging
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    environment: production
     
     steps:
     - name: Debug Info
@@ -186,7 +201,7 @@ jobs:
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
-      if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+      if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./
