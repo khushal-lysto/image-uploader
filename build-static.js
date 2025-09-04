@@ -128,11 +128,6 @@ const htmlTemplate = `<!DOCTYPE html>
                 <p id="errorText"></p>
             </div>
         </main>
-
-        <footer>
-            <p>Powered by Supabase</p>
-            <button id="signOutBtn" class="btn btn-secondary" style="display: none;">Sign Out</button>
-        </footer>
     </div>
 
     <script src="script.js"></script>
