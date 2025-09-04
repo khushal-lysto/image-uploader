@@ -217,3 +217,4 @@ jobs:
           .env.example
           .gitignore
           README.md
+        force_orphan: true
