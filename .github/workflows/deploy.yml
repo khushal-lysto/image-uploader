@@ -30,6 +30,13 @@ jobs:
         AUTH_USERNAME: ${{ secrets.AUTH_USERNAME }}
         AUTH_PASSWORD: ${{ secrets.AUTH_PASSWORD }}
       run: |
+        # Debug environment variables
+        echo "🔍 Environment variables check:"
+        echo "SUPABASE_URL: ${SUPABASE_URL:0:20}..."
+        echo "SUPABASE_ANON_KEY: ${SUPABASE_ANON_KEY:0:20}..."
+        echo "AUTH_USERNAME: $AUTH_USERNAME"
+        echo "AUTH_PASSWORD: ${AUTH_PASSWORD:0:5}..."
+        
         # Create static index.html with environment variables
         cat > index.html << 'EOF'
         <!DOCTYPE html>
@@ -45,6 +52,13 @@ jobs:
                 window.SUPABASE_ANON_KEY = '$SUPABASE_ANON_KEY';
                 window.AUTH_USERNAME = '$AUTH_USERNAME';
                 window.AUTH_PASSWORD = '$AUTH_PASSWORD';
+                
+                // Debug environment variables in browser console
+                console.log('🔍 Environment variables loaded:');
+                console.log('SUPABASE_URL:', window.SUPABASE_URL);
+                console.log('SUPABASE_ANON_KEY:', window.SUPABASE_ANON_KEY ? window.SUPABASE_ANON_KEY.substring(0, 20) + '...' : 'NOT SET');
+                console.log('AUTH_USERNAME:', window.AUTH_USERNAME);
+                console.log('AUTH_PASSWORD:', window.AUTH_PASSWORD ? window.AUTH_PASSWORD.substring(0, 5) + '...' : 'NOT SET');
             </script>
         </head>
         <body>
@@ -154,10 +168,6 @@ jobs:
                     </div>
                 </main>
 
-                <footer>
-                    <p>Powered by Supabase</p>
-                    <button id="signOutBtn" class="btn btn-secondary" style="display: none;">Sign Out</button>
-                </footer>
             </div>
 
             <script src="script.js"></script>
