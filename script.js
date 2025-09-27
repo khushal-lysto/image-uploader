@@ -38,6 +38,21 @@ const errorText = document.getElementById('errorText');
 let selectedFile = null;
 let isAuthenticated = false;
 
+// Authentication state management
+const AUTH_STORAGE_KEY = 'imageUploader_authState';
+
+function saveAuthState() {
+    localStorage.setItem(AUTH_STORAGE_KEY, 'true');
+}
+
+function clearAuthState() {
+    localStorage.removeItem(AUTH_STORAGE_KEY);
+}
+
+function loadAuthState() {
+    return localStorage.getItem(AUTH_STORAGE_KEY) === 'true';
+}
+
 // Authentication functions
 function showAuthError(message) {
     authError.textContent = message;
@@ -65,6 +80,14 @@ function showMainContent() {
     mainContent.style.display = 'block';
     signOutBtn.style.display = 'inline-block';
     isAuthenticated = true;
+    saveAuthState();
+
+    // Test Supabase connection after authentication
+    supabaseClient.storage.listBuckets().then(({ data, error }) => {
+        if (error) {
+            showError(`Supabase connection failed: ${error.message}`);
+        }
+    });
 }
 
 function showAuthForm() {
@@ -72,6 +95,7 @@ function showAuthForm() {
     mainContent.style.display = 'none';
     signOutBtn.style.display = 'none';
     isAuthenticated = false;
+    clearAuthState();
     resetUpload();
 }
 
@@ -301,6 +325,11 @@ copyBtn.addEventListener('click', async () => {
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
+    // Check for existing authentication state
+    if (loadAuthState()) {
+        showMainContent();
+    }
+
     // Get elements after DOM is loaded
     const uploadArea = document.getElementById('uploadArea');
     const fileInput = document.getElementById('fileInput');
@@ -394,16 +423,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Check if Supabase credentials are configured
     if (SUPABASE_URL === 'YOUR_SUPABASE_URL' || SUPABASE_ANON_KEY === 'YOUR_SUPABASE_ANON_KEY') {
-        showError('Please configure your Supabase credentials in script.js');
+        console.error('Please configure your Supabase credentials in script.js');
         return;
     }
-
-    // Test Supabase connection
-    supabaseClient.storage.listBuckets().then(({ data, error }) => {
-        if (error) {
-            showError(`Supabase connection failed: ${error.message}`);
-        }
-    });
 });
 
 // Keyboard shortcuts

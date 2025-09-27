@@ -18,8 +18,6 @@ const htmlTemplate = `<!DOCTYPE html>
     <script>
         window.SUPABASE_URL = '{{SUPABASE_URL}}';
         window.SUPABASE_ANON_KEY = '{{SUPABASE_ANON_KEY}}';
-        window.AUTH_USERNAME = '{{AUTH_USERNAME}}';
-        window.AUTH_PASSWORD = '{{AUTH_PASSWORD}}';
     </script>
 </head>
 <body>
@@ -29,27 +27,7 @@ const htmlTemplate = `<!DOCTYPE html>
             <p>Upload your images and get shareable links with 1-year expiry</p>
         </header>
 
-        <!-- Authentication Form -->
-        <div class="auth-section" id="authSection">
-            <div class="auth-form">
-                <h2>Sign In Required</h2>
-                <p>Please sign in to upload images</p>
-                <form id="authForm">
-                    <div class="form-group">
-                        <label for="username">Username:</label>
-                        <input type="text" id="username" name="username" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password:</label>
-                        <input type="password" id="password" name="password" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Sign In</button>
-                </form>
-                <div class="auth-error" id="authError" style="display: none;"></div>
-            </div>
-        </div>
-
-        <main id="mainContent" style="display: none;">
+        <main id="mainContent">
             <div class="upload-section">
                 <div class="upload-area" id="uploadArea">
                     <div class="upload-content">

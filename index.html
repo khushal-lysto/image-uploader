@@ -1,18 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Upload to Supabase</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script>
-        window.SUPABASE_URL = 'https://ysmcrwbbizmvpkjaaltp.supabase.co';
-        window.SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlzbWNyd2JiaXptdnBramFhbHRwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEzODc2MjEsImV4cCI6MjA2Njk2MzYyMX0.ZJJBRR_tpz0bRCz3uriX8kF_168tJAe1eTWgPdjxvyo';
-        window.AUTH_USERNAME = 'admin';
-        window.AUTH_PASSWORD = '12341234';
-    </script>
+    <!-- Environment variables will be injected by the server -->
 </head>
+
 <body>
     <div class="container">
         <header>
@@ -41,6 +38,12 @@
         </div>
 
         <main id="mainContent" style="display: none;">
+            <nav class="nav-links">
+                <a href="index.html" class="nav-link active">Image Upload</a>
+                <a href="event-upload.html" class="nav-link">Event Upload</a>
+                <button id="signOutBtn" class="btn btn-secondary" style="display: none;">Sign Out</button>
+            </nav>
+
             <div class="upload-section">
                 <div class="upload-area" id="uploadArea">
                     <div class="upload-content">
@@ -51,7 +54,8 @@
                         </svg>
                         <h3 id="dropText">Drop your image here</h3>
                         <p id="clickText">or click to browse</p>
-                        <input type="file" id="fileInput" accept="image/*" style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;">
+                        <input type="file" id="fileInput" accept="image/*"
+                            style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;">
                     </div>
                 </div>
 
@@ -70,8 +74,10 @@
                         <span class="btn-text">Upload Image</span>
                         <span class="btn-loading" style="display: none;">
                             <svg class="spinner" viewBox="0 0 24 24">
-                                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none" opacity="0.25"></circle>
-                                <path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round"></path>
+                                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"
+                                    opacity="0.25"></circle>
+                                <path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" stroke-width="4" fill="none"
+                                    stroke-linecap="round"></path>
                             </svg>
                             Uploading...
                         </span>
@@ -123,4 +129,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Upload to Supabase</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Environment variables will be injected by the server -->
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Event Upload</h1>
+            <p>Upload gaming events to the calendar database</p>
+        </header>
+
+        <!-- Authentication Form -->
+        <div class="auth-section" id="authSection">
+            <div class="auth-form">
+                <h2>Sign In Required</h2>
+                <p>Please sign in to upload events</p>
+                <form id="authForm">
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sign In</button>
+                </form>
+                <div class="auth-error" id="authError" style="display: none;"></div>
+            </div>
+        </div>
+
+        <main id="mainContent" style="display: none;">
+            <nav class="nav-links">
+                <a href="index.html" class="nav-link">Image Upload</a>
+                <a href="event-upload.html" class="nav-link active">Event Upload</a>
+                <button id="signOutBtn" class="btn btn-secondary" style="display: none;">Sign Out</button>
+            </nav>
+
+            <div class="event-form-section">
+                <form id="eventForm" class="event-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="eventTitle">Event Title *</label>
+                            <input type="text" id="eventTitle" name="title" required maxlength="200">
+                        </div>
+                        <div class="form-group">
+                            <label for="eventLocation">Location</label>
+                            <input type="text" id="eventLocation" name="location" maxlength="200">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="startTime">Start Time *</label>
+                            <input type="datetime-local" id="startTime" name="startTime" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="endTime">End Time *</label>
+                            <input type="datetime-local" id="endTime" name="endTime" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="eventCategory">Category *</label>
+                        <select id="eventCategory" name="categoryId" required>
+                            <option value="">Loading categories...</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="eventDescription">Event Description</label>
+                        <textarea id="eventDescription" name="description" rows="4"
+                            placeholder="Describe the event..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="eventLink">Event Link</label>
+                        <input type="url" id="eventLink" name="link" placeholder="https://example.com" maxlength="500">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="eventImageUrl">Image URL</label>
+                        <input type="url" id="eventImageUrl" name="imageUrl" placeholder="https://example.com/image.jpg"
+                            maxlength="500">
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary" id="submitBtn">
+                            <span class="btn-text">Create Event</span>
+                            <span class="btn-loading" style="display: none;">
+                                <svg class="spinner" viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"
+                                        opacity="0.25"></circle>
+                                    <path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" stroke-width="4" fill="none"
+                                        stroke-linecap="round"></path>
+                                </svg>
+                                Creating Event...
+                            </span>
+                        </button>
+                        <button type="button" class="btn btn-secondary" id="clearBtn">Clear Form</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="result-section" id="resultSection" style="display: none;">
+                <div class="success-message">
+                    <svg class="success-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                        <polyline points="22,4 12,14.01 9,11.01"></polyline>
+                    </svg>
+                    <h3>Event Created Successfully!</h3>
+                    <p>Your event has been added to the calendar database.</p>
+                </div>
+            </div>
+
+            <div class="error-message" id="errorMessage" style="display: none;">
+                <svg class="error-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="15" y1="9" x2="9" y2="15"></line>
+                    <line x1="9" y1="9" x2="15" y2="15"></line>
+                </svg>
+                <h3>Event Creation Failed</h3>
+                <p id="errorText"></p>
+            </div>
+        </main>
+    </div>
+
+    <script src="event-upload.js"></script>
+</body>
+
+</html>
